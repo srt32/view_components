@@ -31,7 +31,7 @@ module Primer
     end
 
     def before_render
-      @kwargs['aria-labelledby'] = heading.kwargs[:id] if heading.present?
+      @kwargs["aria-labelledby"] = heading.kwargs[:id] if heading.present?
     end
 
     class Heading < Primer::Slot
