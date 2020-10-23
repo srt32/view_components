@@ -23,12 +23,12 @@ class PrimerMenuComponentTest < Minitest::Test
 
   def test_renders_menu_heading
     render_inline(Primer::MenuComponent.new) do |component|
-      component.slot(:heading) { "Heading" }
+      component.slot(:heading, id: "abc") { "Heading" }
     end
 
     assert_selector(".menu-heading", text: "Heading")
 
     # Assert aria-labelledby is applied to menu when a heading is applied
-    assert_selector("nav[aria-labelledby='menu-heading'] .menu-heading#menu-heading", text: "Heading")
+    assert_selector("nav[aria-labelledby='abc'] .menu-heading#abc", text: "Heading")
   end
 end

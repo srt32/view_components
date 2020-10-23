@@ -18,7 +18,7 @@ module Primer
     end
 
     def before_render
-      @kwargs['aria-labelledby'] = "menu-heading" if heading.present?
+      @kwargs['aria-labelledby'] = heading.kwargs[:id] if heading.present?
     end
 
     class Heading < Primer::Slot
@@ -26,7 +26,7 @@ module Primer
 
       def initialize(**kwargs)
         @kwargs = kwargs
-        @kwargs[:id] = "menu-heading"
+        @kwargs[:id] ||= "menu-heading"
         @kwargs[:tag] ||= :span
         @kwargs[:classes] = class_names(
           kwargs[:classes],
