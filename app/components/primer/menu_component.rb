@@ -27,10 +27,7 @@ module Primer
     def initialize(**kwargs)
       @kwargs = kwargs
       @kwargs[:tag] = :nav
-      @kwargs[:classes] = class_names(
-        kwargs[:classes],
-        "menu"
-      )
+      @kwargs[:classes] = class_names(kwargs[:classes], "menu")
     end
 
     def before_render
@@ -45,10 +42,7 @@ module Primer
         @kwargs = kwargs
         @kwargs[:id] ||= "menu-heading"
         @kwargs[:tag] ||= :span
-        @kwargs[:classes] = class_names(
-          kwargs[:classes],
-          "menu-heading"
-        )
+        @kwargs[:classes] = class_names(kwargs[:classes], "menu-heading")
       end
     end
 
@@ -67,10 +61,7 @@ module Primer
         @kwargs['aria-current'] = "page" if selected
         @kwargs[:tag] = :a
         @kwargs[:href] = href
-        @kwargs[:classes] = class_names(
-          kwargs[:classes],
-          "menu-item"
-        )
+        @kwargs[:classes] = class_names(kwargs[:classes], "menu-item")
       end
     end
   end
