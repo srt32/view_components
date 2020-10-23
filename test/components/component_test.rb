@@ -27,6 +27,10 @@ class PrimerComponentTest < Minitest::Test
     [Primer::LabelComponent, { title: "Hello!" }],
     [Primer::LayoutComponent, {}],
     [Primer::LinkComponent, { href: "https://www.google.com" }],
+    [Primer::MenuComponent, {}, lambda do |component|
+      component.slot(:heading) { "Heading" }
+      component.slot(:item, href: "#url", label: "item")
+    end, { item: { href: "#url", label: "item" } }],
     [Primer::OcticonComponent, { icon: "people" }],
     [Primer::PopoverComponent, {}, proc { |component| component.slot(:body) }],
     [Primer::ProgressBarComponent, {}, proc { |component| component.slot(:item) }],
@@ -44,7 +48,7 @@ class PrimerComponentTest < Minitest::Test
     primer_component_files_count = Dir["app/**/*component.rb"].count
     assert_equal primer_component_files_count, COMPONENTS_WITH_ARGS.length + ignored_components.count, "Primer component added. Please update this test with an entry for your new component <3"
 
-    COMPONENTS_WITH_ARGS.each do |component, args, proc|
+    COMPONENTS_WITH_ARGS.each do |component, args, proc, slot_args|
       # component renders hash arguments
       render_component(component, { my: 4 }.merge(args), proc)
       assert_selector(".my-4")
@@ -64,12 +68,18 @@ class PrimerComponentTest < Minitest::Test
       if component.slots.any?
         render_inline(component.new(**args)) do |c|
           component.slots.each do |slot_name, slot_attributes|
-            c.slot(
-              slot_name,
+            default_args = {
               classes: "test-#{slot_name}",
               my: 1,
               hidden: true,
               "data-ga-click": "Foo,bar"
+            }
+
+            default_args.merge!(slot_args[slot_name]) if slot_args && slot_args[slot_name]
+
+            c.slot(
+              slot_name,
+              **default_args
             ) { "foo" }
           end
         end
