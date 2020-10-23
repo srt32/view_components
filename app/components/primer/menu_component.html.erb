@@ -1,0 +1,7 @@
+<%= render Primer::BaseComponent.new(**@kwargs) do %>
+  <% items.each do |item| %>
+    <%= render Primer::BaseComponent.new(**item.kwargs) do %>
+      <%= item.label %>
+    <% end %>
+  <% end %>
+<% end %>
