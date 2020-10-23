@@ -1,13 +1,22 @@
 # frozen_string_literal: true
 
 module Primer
-  # Primer CSS comes with several navigation components. Some were designed with singular purposes, while others were design to be more flexible and appear quite frequently.
+  # The menu is a vertical list of navigational links.
   class MenuComponent < Primer::Component
     include ViewComponent::Slotable
 
     with_slot :heading, class_name: "Heading"
     with_slot :item, collection: true, class_name: "Item"
 
+    # @example 175|Default
+    #   <%= render(Primer::MenuComponent.new) do |component| %>
+    #     <% component.slot(:heading) { "Heading" } %>
+    #     <% component.slot(:item, href: "#url", label: "Account") %>
+    #     <% component.slot(:item, href: "#url", label: "Profile", selected: true) %>
+    #     <% component.slot(:item, href: "#url", label: "Emails") %>
+    #   <% end %>
+    #
+    # @param kwargs [Hash] <%= link_to_style_arguments_docs %>
     def initialize(**kwargs)
       @kwargs = kwargs
       @kwargs[:tag] = :nav
@@ -24,6 +33,7 @@ module Primer
     class Heading < Primer::Slot
       attr_reader :kwargs
 
+      # @param kwargs [Hash] <%= link_to_style_arguments_docs %>
       def initialize(**kwargs)
         @kwargs = kwargs
         @kwargs[:id] ||= "menu-heading"
@@ -38,6 +48,10 @@ module Primer
     class Item < Primer::Slot
       attr_reader :label, :href, :kwargs
 
+      # @param label [String] Text to display for item.
+      # @param href [String] Url the item should link to.
+      # @param selected [Boolean] Whether the item is the current page.
+      # @param kwargs [Hash] <%= link_to_style_arguments_docs %>
       def initialize(label:, href:, selected: false, **kwargs)
         @label = label
 

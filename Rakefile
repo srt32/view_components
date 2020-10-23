@@ -81,6 +81,7 @@ namespace :docs do
       Primer::LabelComponent,
       Primer::LayoutComponent,
       Primer::LinkComponent,
+      Primer::MenuComponent,
       Primer::OcticonComponent,
       Primer::PopoverComponent,
       Primer::ProgressBarComponent,
@@ -96,7 +97,7 @@ namespace :docs do
       # Primer::AvatarComponent => Avatar
       short_name = component.name.demodulize.gsub("Component", "")
 
-      File.open("docs/content/components/#{short_name}.md", "w") do |f|
+      File.open("docs/content/components/#{short_name.downcase}.md", "w") do |f|
         f.puts("---")
         f.puts("title: #{short_name}")
         f.puts("---")
