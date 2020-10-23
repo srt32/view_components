@@ -8,7 +8,14 @@ module Primer
     with_slot :heading, class_name: "Heading"
     with_slot :item, collection: true, class_name: "Item"
 
-    # @example 175|Default
+    # @example 135|Default
+    #   <%= render(Primer::MenuComponent.new) do |component| %>
+    #     <% component.slot(:item, href: "#url", label: "Account", icon: "tools") %>
+    #     <% component.slot(:item, href: "#url", label: "Profile", icon: "person", selected: true) %>
+    #     <% component.slot(:item, href: "#url", label: "Emails", icon: "mail") %>
+    #   <% end %>
+    #
+    # @example 175|With heading
     #   <%= render(Primer::MenuComponent.new) do |component| %>
     #     <% component.slot(:heading) { "Heading" } %>
     #     <% component.slot(:item, href: "#url", label: "Account") %>
@@ -46,14 +53,15 @@ module Primer
     end
 
     class Item < Primer::Slot
-      attr_reader :label, :href, :kwargs
+      attr_reader :label, :href, :icon, :kwargs
 
       # @param label [String] Text to display for item.
       # @param href [String] Url the item should link to.
+      # @param icon [String] Name of Octicon icon to use.
       # @param selected [Boolean] Whether the item is the current page.
       # @param kwargs [Hash] <%= link_to_style_arguments_docs %>
-      def initialize(label:, href:, selected: false, **kwargs)
-        @label = label
+      def initialize(label:, href:, icon: nil, selected: false, **kwargs)
+        @label, @icon = label, icon
 
         @kwargs = kwargs
         @kwargs['aria-current'] = "page" if selected

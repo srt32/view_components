@@ -6,6 +6,7 @@
   <% end %>
   <% items.each do |item| %>
     <%= render Primer::BaseComponent.new(**item.kwargs) do %>
+      <%= render Primer::OcticonComponent.new(icon: item.icon) if item.icon.present? %>
       <%= item.label %>
     <% end %>
   <% end %>
