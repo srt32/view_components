@@ -5,6 +5,7 @@ module Primer
   class MenuComponent < Primer::Component
     include ViewComponent::Slotable
 
+    with_slot :heading, class_name: "Heading"
     with_slot :item, collection: true, class_name: "Item"
 
     def initialize(**kwargs)
@@ -14,6 +15,24 @@ module Primer
         kwargs[:classes],
         "menu"
       )
+    end
+
+    def before_render
+      @kwargs['aria-labelledby'] = "menu-heading" if heading.present?
+    end
+
+    class Heading < Primer::Slot
+      attr_reader :kwargs
+
+      def initialize(**kwargs)
+        @kwargs = kwargs
+        @kwargs[:id] = "menu-heading"
+        @kwargs[:tag] ||= :span
+        @kwargs[:classes] = class_names(
+          kwargs[:classes],
+          "menu-heading"
+        )
+      end
     end
 
     class Item < Primer::Slot
