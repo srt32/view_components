@@ -14,11 +14,11 @@ class PrimerMenuComponentTest < Minitest::Test
   def test_renders_menu_items
     render_inline(Primer::MenuComponent.new) do |component|
       component.slot(:item, href: "#url", label: "foo")
-      component.slot(:item, href: "#url", label: "bar")
+      component.slot(:item, href: "#url", label: "bar", selected: true)
     end
 
     assert_selector(".menu-item", text: "foo")
-    assert_selector(".menu-item", text: "bar")
+    assert_selector(".menu-item[aria-current='page']", text: "bar")
   end
 
   def test_renders_menu_heading

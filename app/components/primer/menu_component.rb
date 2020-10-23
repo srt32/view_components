@@ -38,10 +38,11 @@ module Primer
     class Item < Primer::Slot
       attr_reader :label, :href, :kwargs
 
-      def initialize(label:, href:, **kwargs)
+      def initialize(label:, href:, selected: false, **kwargs)
         @label = label
 
         @kwargs = kwargs
+        @kwargs['aria-current'] = "page" if selected
         @kwargs[:tag] = :a
         @kwargs[:href] = href
         @kwargs[:classes] = class_names(
