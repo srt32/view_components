@@ -58,7 +58,7 @@ module Primer
         @label, @icon = label, icon
 
         @kwargs = kwargs
-        @kwargs['aria-current'] = "page" if selected
+        @kwargs["aria-current"] = "page" if selected
         @kwargs[:tag] = :a
         @kwargs[:href] = href
         @kwargs[:classes] = class_names(kwargs[:classes], "menu-item")
