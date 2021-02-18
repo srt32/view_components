@@ -16,19 +16,8 @@ Use DetailsComponent to reveal content after clicking a button.
 | `reset` | `Boolean` | `false` | Defatuls to false. If set to true, it will remove the default caret and remove style from the summary element |
 | `system_arguments` | `Hash` | N/A | [System arguments](/system-arguments) |
 
-### `body` slot
+## Slots
 
-| Name | Type | Default | Description |
-| :- | :- | :- | :- |
-| `system_arguments` | `Hash` | N/A | [System arguments](/system-arguments) |
+### `Body`
 
-Use the Body slot as the main content to be shown when triggered by the Summary.
-
-### `summary` slot
-
-| Name | Type | Default | Description |
-| :- | :- | :- | :- |
-| `button` | `Boolean` | `true` | Whether to render the Summary as a button or not. |
-| `system_arguments` | `Hash` | N/A | [System arguments](/system-arguments) |
-
-Use the Summary slot as a trigger to reveal the content.
+### `Summary`
