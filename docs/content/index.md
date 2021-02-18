@@ -21,6 +21,9 @@ Render Primer ViewComponents from templates:
 
 In `Gemfile`, add:
 
+
+
+
 ```ruby
 gem "primer_view_components"
 ```
