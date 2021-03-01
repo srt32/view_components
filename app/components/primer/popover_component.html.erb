@@ -1,10 +1,6 @@
 <%= render Primer::BaseComponent.new(**@system_arguments) do %>
-  <%= render body.component do %>
-    <% if heading %>
-      <%= render heading.component do %>
-        <%= heading.content %>
-      <% end %>
-    <% end %>
-    <%= body.content %>
+  <%= body do |body_component| %>
+    <%= render heading %>
+    <%= render body_component.content %>
   <% end %>
 <% end %>
